@@ -47,15 +47,15 @@ PRODUCT_COPY_FILES := \
 
 # Init files
 PRODUCT_COPY_FILES += \
-	device/samsung/captivate/init.aries.rc:root/init.aries.rc \
-	device/samsung/captivate/ueventd.aries.rc:root/ueventd.aries.rc \
-    device/samsung/captivate/recovery.rc:root/recovery.rc
+	device/samsung/captivate/initramfs/data/init.aries.rc:root/init.aries.rc \
+	device/samsung/captivate/initramfs/data/ueventd.aries.rc:root/ueventd.aries.rc \
+	device/samsung/captivate/initramfs/data/recovery.rc:root/recovery.rc
 
 # Recovery Files
 PRODUCT_COPY_FILES += \
-	device/samsung/captivate/init.aries.rc:recovery/root/init.aries.rc \
-	device/samsung/captivate/ueventd.aries.rc:recovery/root/ueventd.aries.rc \
-    device/samsung/captivate/recovery.rc:recovery/root/recovery.rc
+	device/samsung/captivate/initramfs/data/init.aries.rc:recovery/root/init.aries.rc \
+	device/samsung/captivate/initramfs/data/ueventd.aries.rc:recovery/root/ueventd.aries.rc \
+ 	device/samsung/captivate/initramfs/data/recovery.rc:recovery/root/recovery.rc
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
