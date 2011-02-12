@@ -306,9 +306,9 @@ int BoschYamaha::readEvents(sensors_event_t* data, int count)
 				//LOGD("Sensor: Received one EV_ABS Event");
 				float value = event->value;
 				if (event->code == EVENT_TYPE_ACCEL_X) {
-					mPendingEvents[Accelerometer].acceleration.x = value * CONVERT_A_X;
+					mPendingEvents[Accelerometer].acceleration.y = value * CONVERT_A_X;
 				} else if (event->code == EVENT_TYPE_ACCEL_Y) {
-					mPendingEvents[Accelerometer].acceleration.y = value * CONVERT_A_Y;
+					mPendingEvents[Accelerometer].acceleration.x = value * CONVERT_A_Y;
 				} else if (event->code == EVENT_TYPE_ACCEL_Z) {
 					mPendingEvents[Accelerometer].acceleration.z = value * CONVERT_A_Z;
 				}
