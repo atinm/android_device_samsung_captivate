@@ -88,8 +88,8 @@ BOARD_HAS_MTD_CACHE := true
 BOARD_HAS_SDCARD_INTERNAL := true
 BOARD_SDCARD_DEVICE_INTERNAL := /dev/block/mmcblk0p1
 BOARD_HAS_DOWNLOAD_MODE := true
-TARGET_RAMDISK_IS_RECOVERY := true
-BOARD_RAMDISK_NO_GZIP := true
+TARGET_ROOT_IS_RECOVERY := true
+TARGET_BOOT_IS_RAMDISK := true
 
 # Include aries specific stuff
 -include device/samsung/common/aries.mk

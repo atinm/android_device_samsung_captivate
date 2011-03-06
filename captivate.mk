@@ -49,13 +49,11 @@ PRODUCT_COPY_FILES = \
 PRODUCT_COPY_FILES += \
 	device/samsung/captivate/init.rc:root/init.rc \
 	device/samsung/captivate/init.aries.rc:root/init.aries.rc \
-	device/samsung/captivate/ueventd.aries.rc:root/ueventd.aries.rc \
-        device/samsung/captivate/recovery.rc:root/recovery.rc
+	device/samsung/captivate/ueventd.aries.rc:root/ueventd.aries.rc
 
 # Recovery Files
 PRODUCT_COPY_FILES += \
-        device/samsung/captivate/recovery.rc:recovery/root/recovery.rc \
-	device/samsung/captivate/fbsetup.sh:recovery/root/sbin/fbsetup.sh
+        device/samsung/captivate/recovery.rc:recovery/root/recovery.rc
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
@@ -148,30 +146,31 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 # PRODUCT_LOCALES expansion must not be a density.
 PRODUCT_LOCALES := hdpi
 
-hack_PRODUCT_OUT := out/target/product/captivate
 # kernel modules
 PRODUCT_COPY_FILES += \
-	$(hack_PRODUCT_OUT)/kernel_build/drivers/net/wireless/bcm4329/bcm4329.ko:system/modules/bcm4329.ko \
-	$(hack_PRODUCT_OUT)/kernel_build/fs/cifs/cifs.ko:system/modules/cifs.ko \
-	$(hack_PRODUCT_OUT)/kernel_build/drivers/net/tun.ko:system/modules/tun.ko
+	out/target/product/captivate/kernel_build/drivers/net/wireless/bcm4329/bcm4329.ko:system/modules/bcm4329.ko \
+	out/target/product/captivate/kernel_build/fs/cifs/cifs.ko:system/modules/cifs.ko \
+	out/target/product/captivate/kernel_build/drivers/net/tun.ko:system/modules/tun.ko
 
 ifeq ($(TARGET_PREBUILT_ZIMAGE),)
-LOCAL_ZIMAGE = $(hack_PRODUCT_OUT)/kernel
+LOCAL_ZIMAGE = out/target/product/captivate/kernel
 else
 LOCAL_ZIMAGE := $(TARGET_PREBUILT_ZIMAGE)
 endif
 
-$(hack_PRODUCT_OUT)/kernel_build/drivers/net/wireless/bcm4329/bcm4329.ko: $(LOCAL_ZIMAGE)
-$(hack_PRODUCT_OUT)/kernel_build/fs/cifs/cifs.ko: $(LOCAL_ZIMAGE)
-$(hack_PRODUCT_OUT)/kernel_build/drivers/net/tun.ko: $(LOCAL_ZIMAGE)
+out/target/product/captivate/kernel_build/drivers/net/wireless/bcm4329/bcm4329.ko: $(LOCAL_ZIMAGE)
+out/target/product/captivate/kernel_build/fs/cifs/cifs.ko: $(LOCAL_ZIMAGE)
+out/target/product/captivate/kernel_build/drivers/net/tun.ko: $(LOCAL_ZIMAGE)
 
 .PHONY: build_kernel
 
-$(hack_PRODUCT_OUT)/kernel_build/.config:
+out/target/product/captivate/kernel_build/.config:
 	$(hide) mkdir -p $(PRODUCT_OUT)/kernel_build
 	$(hide) $(MAKE) -C kernel/samsung/2.6.35 O=$(ANDROID_BUILD_TOP)/$(PRODUCT_OUT)/kernel_build aries_captivate_defconfig
 
-$(hack_PRODUCT_OUT)/kernel: $(hack_PRODUCT_OUT)/recovery.img $(hack_PRODUCT_OUT)/kernel_build/.config build_kernel
+out/target/product/captivate/kernel: out/target/product/captivate/recovery.img out/target/product/captivate/kernel_build/.config build_kernel
+	@echo "BUILDING KERNEL"
+	@echo "recovery.img size: `ls -l out/target/product/captivate/recovery.img`"
 	$(hide) $(MAKE) -C kernel/samsung/2.6.35 O=$(ANDROID_BUILD_TOP)/$(PRODUCT_OUT)/kernel_build CROSS_COMPILE=$(ANDROID_BUILD_TOP)/$(subst -gcc,-,$(TARGET_CC))
 	$(hide) $(ACP) $(PRODUCT_OUT)/kernel_build/arch/arm/boot/zImage $(PRODUCT_OUT)/kernel
 
