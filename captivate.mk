@@ -49,7 +49,8 @@ PRODUCT_COPY_FILES = \
 PRODUCT_COPY_FILES += \
 	device/samsung/captivate/init.rc:root/init.rc \
 	device/samsung/captivate/init.aries.rc:root/init.aries.rc \
-	device/samsung/captivate/ueventd.aries.rc:root/ueventd.aries.rc
+	device/samsung/captivate/ueventd.aries.rc:root/ueventd.aries.rc \
+	device/samsung/captivate/setupenv.sh:recovery/root/sbin/setupenv.sh
 
 # Recovery Files
 PRODUCT_COPY_FILES += \
